@@ -35,7 +35,7 @@ if not st.session_state.logged_in:
             else:
                 st.error("İstifadəçi adı və ya şifrə yanlışdır!")
         st.markdown("</div>", unsafe_allow_html=True)
-    st.stop() # Login olmadan aşağıdakı kodları oxumasın
+    st.stop()
 
 # --- 🚀 ƏSAS TƏTBİQ ---
 if "map_center" not in st.session_state:
@@ -44,9 +44,8 @@ if "run_analysis" not in st.session_state:
     st.session_state.run_analysis = False
 
 st.title("🗺️ GeoTarget AI - İnteqrativ PRO Versiya")
-st.markdown("Xəritədə nöqtəyə klikləyin, radiusu seçin. Sistem real-time analiz edəcək və tapılan obyektləri ikonlarla göstərəcək!")
+st.markdown("Xəritədə istədiyiniz nöqtəyə klikləyərək mərkəzi seçin, sonra sol paneldən **Analiz Et** düyməsinə basın.")
 
-# Məlumatları keşləyirik ki, hesablama SÜRƏTLİ olsun (Speed Optimization)
 @st.cache_data(show_spinner=False)
 def fetch_data(center, radius, comp_tags, mag_tags):
     competitors = get_osm_data(center, radius, comp_tags)
@@ -56,7 +55,7 @@ def fetch_data(center, radius, comp_tags, mag_tags):
 
 with st.sidebar:
     st.header("⚙️ Axtarış Parametrləri")
-    st.info("💡 Mərkəzi seçmək üçün sağdakı xəritəyə klikləyin!")
+    st.info("💡 Mərkəzi təyin etmək üçün xəritədə istədiyiniz yerə bir dəfə klikləyin. Mərkəz dəyişəcək, amma analiz yalnız siz düyməyə basanda gedəcək!")
     
     lat = st.number_input("Enlik", value=st.session_state.map_center[0], format="%.5f")
     lng = st.number_input("Uzunluq", value=st.session_state.map_center[1], format="%.5f")
@@ -79,24 +78,20 @@ with st.sidebar:
         st.session_state.logged_in = False
         st.rerun()
 
-# İkonların təyini
 icon_map = {
-    "Kafe/Restoran": "coffee",
-    "Market/Pərakəndə": "shopping-cart",
-    "Fitnes/İdman Zalı": "dumbbell",
-    "Aptek/Klinika": "medkit",
-    "Tədris/Kurs Mərkəzi": "graduation-cap",
-    "Gözəllik/Xidmət": "scissors"
+    "Kafe/Restoran": "coffee", "Market/Pərakəndə": "shopping-cart",
+    "Fitnes/İdman Zalı": "dumbbell", "Aptek/Klinika": "medkit",
+    "Tədris/Kurs Mərkəzi": "graduation-cap", "Gözəllik/Xidmət": "scissors"
 }
 
 m = folium.Map(location=st.session_state.map_center, zoom_start=15, tiles="CartoDB dark_matter")
 
 folium.Circle(
     location=st.session_state.map_center, radius=radius, color="#3498db", weight=2,
-    fill=True, fill_color="#3498db", fill_opacity=0.1, tooltip="Sürətli Analiz Sahəsi"
+    fill=True, fill_color="#3498db", fill_opacity=0.1, tooltip=f"Analiz Sahəsi ({radius}m)"
 ).add_to(m)
 
-folium.Marker(st.session_state.map_center, popup="Mərkəz", icon=folium.Icon(color="red", icon="crosshairs", prefix='fa')).add_to(m)
+folium.Marker(st.session_state.map_center, popup="Seçilmiş Mərkəz", icon=folium.Icon(color="red", icon="crosshairs", prefix='fa')).add_to(m)
 
 top5 = pd.DataFrame()
 scored_grid = pd.DataFrame()
@@ -125,7 +120,6 @@ if st.session_state.run_analysis:
             if score >= 5: return "#f1c40f"
             return "#e74c3c"
             
-        # Altıbucaqlıları xəritəyə əlavə edirik
         for idx, row in scored_grid.iterrows():
             feature_props = {"h3_index": row["h3_index"], "score": round(row["score"], 1), "magnet_count": int(row["magnet_count"]), "competitor_count": int(row["competitor_count"])}
             gj = folium.GeoJson(
@@ -136,37 +130,51 @@ if st.session_state.run_analysis:
             gj.data['features'][0]['properties'] = feature_props
             gj.add_to(m)
 
-        # Rəqibləri xəritədə ikonla göstəririk
+        # OBYEKTLƏRİN (RƏQİBLƏRİN) DETALLI ADLARI İLƏ GÖSTƏRİLMƏSİ
         if not competitors_gdf.empty:
             for _, row in competitors_gdf.iterrows():
                 geom = row.geometry
                 lat_c, lng_c = (geom.y, geom.x) if geom.geom_type == 'Point' else (geom.centroid.y, geom.centroid.x)
+                
+                # Obyektin adını tapırıq, yoxdursa "Adsız Obyekt" yazırıq
+                obj_name = row.get("name", "Adsız Obyekt")
+                if pd.isna(obj_name): obj_name = "Adsız Obyekt"
+                
+                tooltip_html = f"<b>{obj_name}</b><br>Növ: {business_type}"
+                
                 folium.Marker(
                     [lat_c, lng_c], 
-                    icon=folium.Icon(color="darkred", icon=icon_map[business_type], prefix='fa'),
-                    tooltip=f"Rəqib Obyekt ({business_type})"
+                    icon=folium.Icon(color="darkred", icon=icon_map.get(business_type, "info-sign"), prefix='fa'),
+                    tooltip=tooltip_html
                 ).add_to(m)
         
-        # Maqnitləri xəritədə ikonla göstəririk
+        # MAQNİTLƏRİN DETALLI ADLARI İLƏ GÖSTƏRİLMƏSİ
         if not magnets_gdf.empty:
             for _, row in magnets_gdf.iterrows():
                 geom = row.geometry
                 lat_m, lng_m = (geom.y, geom.x) if geom.geom_type == 'Point' else (geom.centroid.y, geom.centroid.x)
+                
+                mag_name = row.get("name", "Adsız Maqnit/Dayanacaq")
+                if pd.isna(mag_name): mag_name = "Adsız Maqnit/Dayanacaq"
+                
+                tooltip_html = f"<b>{mag_name}</b><br>Trafik Maqniti"
+                
                 folium.Marker(
                     [lat_m, lng_m], 
                     icon=folium.Icon(color="blue", icon="magnet", prefix='fa'),
-                    tooltip="Trafik Maqniti (Dayanacaq, Park və s.)"
+                    tooltip=tooltip_html
                 ).add_to(m)
 
 tab1, tab2, tab3 = st.tabs(["🗺️ İnteqrativ Xəritə", "⚖️ Ssenari Müqayisəsi", "📊 Analitika"])
 
 with tab1:
-    map_data = st_folium(m, width="100%", height=500)
+    map_data = st_folium(m, width="100%", height=500, returned_objects=["last_clicked", "last_active_drawing"])
     
     if map_data and map_data.get("last_clicked"):
         clicked_lat, clicked_lng = map_data["last_clicked"]["lat"], map_data["last_clicked"]["lng"]
         if round(clicked_lat, 4) != round(st.session_state.map_center[0], 4) or round(clicked_lng, 4) != round(st.session_state.map_center[1], 4):
             st.session_state.map_center = [clicked_lat, clicked_lng]
+            # Sırf mərkəzi dəyişir, TƏZƏDƏN DATA YÜKLƏMİR!
             st.session_state.run_analysis = False
             st.rerun()
 
