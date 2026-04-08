@@ -9,42 +9,128 @@ from src.data_loader import get_osm_data, get_building_data
 from src.engine import generate_h3_grid, calculate_scores
 from src.ai_analyst import generate_business_report
 
-st.set_page_config(page_title="GeoTarget AI PRO", layout="wide", page_icon="🗺️")
+st.set_page_config(page_title="GeoTarget AI PRO", layout="wide", page_icon="🌍")
+
+# --- 🎨 CUSTOM CSS (PROFESSIONAL SAAS UI) ---
+st.markdown("""
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+    
+    html, body, [class*="css"] {
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+    }
+    
+    /* Gərəksiz Streamlit elementlərini gizlədirik */
+    #MainMenu {visibility: hidden;}
+    header {visibility: hidden;}
+    footer {visibility: hidden;}
+    
+    /* Düymələrin SaaS dizaynı */
+    div.stButton > button {
+        background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        color: white;
+        border-radius: 8px;
+        border: none;
+        padding: 0.5rem 1rem;
+        font-weight: 600;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transition: all 0.2s ease-in-out;
+    }
+    div.stButton > button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        color: white;
+        border: none;
+    }
+    
+    /* Metrik (Xal/KPI) Kartlarının Dizaynı */
+    div[data-testid="metric-container"] {
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        transition: transform 0.2s ease;
+    }
+    div[data-testid="metric-container"]:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Tabların (Nişanların) Dizaynı */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 24px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        height: 50px;
+        white-space: pre-wrap;
+        background-color: transparent;
+        border-radius: 4px 4px 0px 0px;
+        gap: 1px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-weight: 600;
+    }
+    
+    /* Dark Mode Uyğunlaşdırması */
+    @media (prefers-color-scheme: dark) {
+        div[data-testid="metric-container"] {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+        }
+        .login-box {
+            background: #1e293b !important;
+            border: 1px solid #334155 !important;
+        }
+        .login-title { color: #f8fafc !important; }
+        .login-subtitle { color: #94a3b8 !important; }
+    }
+</style>
+""", unsafe_allow_html=True)
 
 # --- 🔐 LOGIN PAGE (SİSTEMƏ GİRİŞ) ---
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
 if not st.session_state.logged_in:
-    st.markdown("<h1 style='text-align: center; margin-top: 50px;'>🗺️ GeoTarget AI Platformasına Giriş</h1>", unsafe_allow_html=True)
-    
-    col1, col2, col3 = st.columns([1, 1, 1])
+    col1, col2, col3 = st.columns([1, 1.2, 1])
     with col2:
+        st.markdown("<br><br><br>", unsafe_allow_html=True)
         st.markdown("""
-        <div style="background-color: #1e1e1e; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-        <h3 style="text-align: center; color: white;">Hesabınıza daxil olun</h3>
+        <div class="login-box" style="background-color: white; padding: 40px; border-radius: 16px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); border: 1px solid #f1f5f9; text-align: center;">
+            <div style="font-size: 50px; margin-bottom: 10px;">🌍</div>
+            <h2 class="login-title" style="color: #0f172a; font-weight: 700; margin-bottom: 5px; font-family: 'Plus Jakarta Sans', sans-serif;">GeoTarget AI</h2>
+            <p class="login-subtitle" style="color: #64748b; font-size: 15px; margin-bottom: 30px;">Professional Geo-Analitika Platformasına Giriş</p>
         """, unsafe_allow_html=True)
         
-        user = st.text_input("İstifadəçi adı (İpucu: admin)")
-        pwd = st.text_input("Şifrə (İpucu: admin)", type="password")
+        user = st.text_input("İstifadəçi Adı (admin)", placeholder="İstifadəçi adını daxil edin...")
+        pwd = st.text_input("Şifrə (admin)", type="password", placeholder="••••••••")
         
-        if st.button("Daxil ol 🚀", use_container_width=True):
+        st.markdown("<br>", unsafe_allow_html=True)
+        if st.button("Platformaya Daxil Ol 🚀", use_container_width=True):
             if user == "admin" and pwd == "admin":
                 st.session_state.logged_in = True
                 st.rerun()
             else:
-                st.error("İstifadəçi adı və ya şifrə yanlışdır!")
+                st.error("⚠️ İstifadəçi adı və ya şifrə yanlışdır!")
         st.markdown("</div>", unsafe_allow_html=True)
     st.stop()
 
-# --- 🚀 ƏSAS TƏTBİQ ---
+# --- 🚀 ƏSAS TƏTBİQ (DASHBOARD) ---
 if "map_center" not in st.session_state:
-    st.session_state.map_center = [40.4093, 49.8671] # Default Baku
+    st.session_state.map_center = [40.4093, 49.8671] 
 if "run_analysis" not in st.session_state:
     st.session_state.run_analysis = False
 
-st.title("🗺️ GeoTarget AI - İnteqrativ PRO Versiya")
-st.markdown("Xəritədə istədiyiniz nöqtəyə klikləyərək mərkəzi seçin, sonra sol paneldən **Analiz Et** düyməsinə basın.")
+st.markdown("""
+<div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+    <div style="font-size: 40px;">🌍</div>
+    <div>
+        <h1 style="margin: 0; padding: 0; font-size: 32px; font-weight: 800; color: #2563eb;">GeoTarget AI Workspace</h1>
+        <p style="margin: 0; padding: 0; color: #64748b; font-size: 15px;">Real-time OpenStreetMap Data & Uber H3 Hexagonal Analytics</p>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 @st.cache_data(show_spinner=False)
 def fetch_data(center, radius, comp_tags, mag_tags):
@@ -54,27 +140,30 @@ def fetch_data(center, radius, comp_tags, mag_tags):
     return competitors, magnets, buildings
 
 with st.sidebar:
-    st.header("⚙️ Axtarış Parametrləri")
-    st.info("💡 Mərkəzi təyin etmək üçün xəritədə istədiyiniz yerə bir dəfə klikləyin. Mərkəz dəyişəcək, amma analiz yalnız siz düyməyə basanda gedəcək!")
+    st.markdown("<h2 style='font-size: 20px; font-weight: 700; color: #1e293b;'>⚙️ Axtarış Konfiqurasiyası</h2>", unsafe_allow_html=True)
+    st.info("💡 Mərkəzi təyin etmək üçün sağdakı xəritədə klikləyin.")
     
-    lat = st.number_input("Enlik", value=st.session_state.map_center[0], format="%.5f")
-    lng = st.number_input("Uzunluq", value=st.session_state.map_center[1], format="%.5f")
+    lat = st.number_input("📍 Enlik (Latitude)", value=st.session_state.map_center[0], format="%.5f")
+    lng = st.number_input("📍 Uzunluq (Longitude)", value=st.session_state.map_center[1], format="%.5f")
     st.session_state.map_center = [lat, lng]
     
-    radius = st.slider("Axtarış Radiusu (metr)", 200, 3000, 1000, step=100)
-    business_type = st.selectbox("Hədəf Biznes Növü", [
+    st.markdown("---")
+    radius = st.slider("📏 Axtarış Radiusu (metr)", 200, 3000, 1000, step=100)
+    business_type = st.selectbox("🏢 Hədəf Biznes Növü", [
         "Kafe/Restoran", "Market/Pərakəndə", "Fitnes/İdman Zalı",
         "Aptek/Klinika", "Tədris/Kurs Mərkəzi", "Gözəllik/Xidmət"
     ])
     
-    with st.expander("🛠️ Alqoritm Çəkiləri"):
-        comp_weight = st.slider("Rəqiblərin Təsiri (-)", 0.0, 3.0, 1.2)
-        mag_weight = st.slider("Maqnitlərin Təsiri (+)", 0.0, 3.0, 2.0)
+    with st.expander("🎛️ Süni İntellekt Çəkiləri (Advanced)"):
+        comp_weight = st.slider("Rəqiblərin Mənfi Təsiri", 0.0, 3.0, 1.2)
+        mag_weight = st.slider("Trafik Maqnitlərinin Müsbət Təsiri", 0.0, 3.0, 2.0)
 
-    if st.button("Bu Nöqtəni Analiz Et 🚀", type="primary", use_container_width=True):
+    st.markdown("<br>", unsafe_allow_html=True)
+    if st.button("Analizi Başlat ⚡", type="primary", use_container_width=True):
         st.session_state.run_analysis = True
         
-    if st.button("Çıxış Et (Logout)", use_container_width=True):
+    st.markdown("<br>", unsafe_allow_html=True)
+    if st.button("🚪 Çıxış (Logout)", use_container_width=True):
         st.session_state.logged_in = False
         st.rerun()
 
@@ -87,8 +176,8 @@ icon_map = {
 m = folium.Map(location=st.session_state.map_center, zoom_start=15, tiles="CartoDB dark_matter")
 
 folium.Circle(
-    location=st.session_state.map_center, radius=radius, color="#3498db", weight=2,
-    fill=True, fill_color="#3498db", fill_opacity=0.1, tooltip=f"Analiz Sahəsi ({radius}m)"
+    location=st.session_state.map_center, radius=radius, color="#2563eb", weight=2,
+    fill=True, fill_color="#3b82f6", fill_opacity=0.15, tooltip=f"Analiz Sahəsi ({radius}m)"
 ).add_to(m)
 
 folium.Marker(st.session_state.map_center, popup="Seçilmiş Mərkəz", icon=folium.Icon(color="red", icon="crosshairs", prefix='fa')).add_to(m)
@@ -108,7 +197,7 @@ if st.session_state.run_analysis:
     
     magnets_tags = {"public_transport": "station", "highway": "bus_stop", "amenity": "university", "leisure": "park"}
     
-    with st.spinner("Real-Time Data Çəkilir və Nəticələr Yığılır..."):
+    with st.spinner("⏳ Real-Time OSM Data Çəkilir və H3 Şəbəkəsi Qurulur..."):
         competitors_gdf, magnets_gdf, buildings_gdf = fetch_data(center_point, radius, competitors_tags, magnets_tags)
         
         hex_grid = generate_h3_grid(center_point, radius, resolution=9)
@@ -116,9 +205,9 @@ if st.session_state.run_analysis:
         top5 = scored_grid.sort_values(by="score", ascending=False).head(5)
         
         def get_color(score):
-            if score >= 8: return "#2ecc71"
-            if score >= 5: return "#f1c40f"
-            return "#e74c3c"
+            if score >= 8: return "#10b981" # Emerald 500
+            if score >= 5: return "#f59e0b" # Amber 500
+            return "#ef4444"                # Red 500
             
         for idx, row in scored_grid.iterrows():
             feature_props = {"h3_index": row["h3_index"], "score": round(row["score"], 1), "magnet_count": int(row["magnet_count"]), "competitor_count": int(row["competitor_count"])}
@@ -130,85 +219,78 @@ if st.session_state.run_analysis:
             gj.data['features'][0]['properties'] = feature_props
             gj.add_to(m)
 
-        # OBYEKTLƏRİN (RƏQİBLƏRİN) DETALLI ADLARI İLƏ GÖSTƏRİLMƏSİ
         if not competitors_gdf.empty:
             for _, row in competitors_gdf.iterrows():
                 geom = row.geometry
                 lat_c, lng_c = (geom.y, geom.x) if geom.geom_type == 'Point' else (geom.centroid.y, geom.centroid.x)
-                
-                # Obyektin adını tapırıq, yoxdursa "Adsız Obyekt" yazırıq
-                obj_name = row.get("name", "Adsız Obyekt")
-                if pd.isna(obj_name): obj_name = "Adsız Obyekt"
-                
-                tooltip_html = f"<b>{obj_name}</b><br>Növ: {business_type}"
-                
+                obj_name = row.get("name", "Adsız Obyekt") if pd.notna(row.get("name")) else "Adsız Obyekt"
                 folium.Marker(
                     [lat_c, lng_c], 
                     icon=folium.Icon(color="darkred", icon=icon_map.get(business_type, "info-sign"), prefix='fa'),
-                    tooltip=tooltip_html
+                    tooltip=f"<div style='font-family:sans-serif;'><b>{obj_name}</b><br><small>Rəqib ({business_type})</small></div>"
                 ).add_to(m)
         
-        # MAQNİTLƏRİN DETALLI ADLARI İLƏ GÖSTƏRİLMƏSİ
         if not magnets_gdf.empty:
             for _, row in magnets_gdf.iterrows():
                 geom = row.geometry
                 lat_m, lng_m = (geom.y, geom.x) if geom.geom_type == 'Point' else (geom.centroid.y, geom.centroid.x)
-                
-                mag_name = row.get("name", "Adsız Maqnit/Dayanacaq")
-                if pd.isna(mag_name): mag_name = "Adsız Maqnit/Dayanacaq"
-                
-                tooltip_html = f"<b>{mag_name}</b><br>Trafik Maqniti"
-                
+                mag_name = row.get("name", "Adsız Maqnit/Dayanacaq") if pd.notna(row.get("name")) else "Adsız Maqnit/Dayanacaq"
                 folium.Marker(
                     [lat_m, lng_m], 
                     icon=folium.Icon(color="blue", icon="magnet", prefix='fa'),
-                    tooltip=tooltip_html
+                    tooltip=f"<div style='font-family:sans-serif;'><b>{mag_name}</b><br><small>Trafik Maqniti</small></div>"
                 ).add_to(m)
 
-tab1, tab2, tab3 = st.tabs(["🗺️ İnteqrativ Xəritə", "⚖️ Ssenari Müqayisəsi", "📊 Analitika"])
+tab1, tab2, tab3 = st.tabs(["🗺️ İnteqrativ Xəritə (Map)", "⚖️ Heksagon Müqayisəsi (Compare)", "📊 Rəqəmsal Analitika (Data)"])
 
 with tab1:
-    map_data = st_folium(m, width="100%", height=500, returned_objects=["last_clicked", "last_active_drawing"])
+    map_data = st_folium(m, width="100%", height=550, returned_objects=["last_clicked", "last_active_drawing"])
     
     if map_data and map_data.get("last_clicked"):
         clicked_lat, clicked_lng = map_data["last_clicked"]["lat"], map_data["last_clicked"]["lng"]
         if round(clicked_lat, 4) != round(st.session_state.map_center[0], 4) or round(clicked_lng, 4) != round(st.session_state.map_center[1], 4):
             st.session_state.map_center = [clicked_lat, clicked_lng]
-            # Sırf mərkəzi dəyişir, TƏZƏDƏN DATA YÜKLƏMİR!
             st.session_state.run_analysis = False
             st.rerun()
 
     if map_data and map_data.get("last_active_drawing"):
         props = map_data["last_active_drawing"].get("properties", {})
         if "h3_index" in props:
-            st.success(f"📍 **Seçilmiş Zona: {props['h3_index']}**")
+            st.markdown(f"<div style='background:#f8fafc; padding:15px; border-radius:8px; border-left:4px solid #3b82f6; margin-bottom:15px;'><b>📍 Seçilmiş H3 Zonası:</b> {props['h3_index']}</div>", unsafe_allow_html=True)
             c1, c2, c3 = st.columns(3)
-            c1.metric("⭐ Xal", props["score"])
-            c2.metric("🏪 Rəqiblər", props["competitor_count"])
-            c3.metric("🧲 Maqnitlər", props["magnet_count"])
+            c1.metric("⭐ Süni İntellekt Xalı", f"{props['score']}/10")
+            c2.metric("🏪 Tapılan Rəqiblər", props["competitor_count"])
+            c3.metric("🧲 Trafik Maqnitləri", props["magnet_count"])
 
     if st.session_state.run_analysis and not top5.empty:
-        st.markdown("### 🤖 Süni İntellektin Ümumi Rəyi")
+        st.markdown("### 🤖 Əsas Zona Üçün AI Rəyi")
         st.info(generate_business_report(top5.iloc[0], business_type))
 
 with tab2:
     if not top5.empty and len(top5) >= 2:
+        st.markdown("### ⚖️ Lider Məkanların Çoxölçülü Müqayisəsi")
         loc_a, loc_b = top5.iloc[0], top5.iloc[1]
+        
         c1, c2 = st.columns(2)
-        c1.success(f"**🥇 Məkan A** - Xal: {loc_a['score']:.1f}")
-        c2.warning(f"**🥈 Məkan B** - Xal: {loc_b['score']:.1f}")
+        c1.markdown(f"<div style='background:#ecfdf5; padding:15px; border-radius:10px; border:1px solid #10b981;'><h3 style='color:#047857; margin:0;'>🥇 Məkan A</h3><h1 style='color:#059669; margin:0;'>{loc_a['score']:.1f}<span style='font-size:18px;'>/10</span></h1></div>", unsafe_allow_html=True)
+        c2.markdown(f"<div style='background:#fffbeb; padding:15px; border-radius:10px; border:1px solid #f59e0b;'><h3 style='color:#b45309; margin:0;'>🥈 Məkan B</h3><h1 style='color:#d97706; margin:0;'>{loc_b['score']:.1f}<span style='font-size:18px;'>/10</span></h1></div>", unsafe_allow_html=True)
+        
+        st.markdown("<br>", unsafe_allow_html=True)
         
         def norm_val(val, max_val): return min(10, (val / max_val) * 10) if max_val > 0 else 0
         max_mag, max_pop, max_comp = scored_grid['magnet_count'].max() or 1, scored_grid['population_proxy'].max() or 1, scored_grid['competitor_count'].max() or 1
         
         fig = go.Figure()
-        fig.add_trace(go.Scatterpolar(r=[norm_val(loc_a['magnet_count'], max_mag), 10 - norm_val(loc_a['competitor_count'], max_comp), norm_val(loc_a['population_proxy'], max_pop), loc_a['score']], theta=['Trafik', 'Rəqabətin Azlığı', 'Əhali', 'Potensial'], fill='toself', name='🥇 Məkan A', line_color='#2ecc71'))
-        fig.add_trace(go.Scatterpolar(r=[norm_val(loc_b['magnet_count'], max_mag), 10 - norm_val(loc_b['competitor_count'], max_comp), norm_val(loc_b['population_proxy'], max_pop), loc_b['score']], theta=['Trafik', 'Rəqabətin Azlığı', 'Əhali', 'Potensial'], fill='toself', name='🥈 Məkan B', line_color='#f1c40f'))
-        fig.update_layout(polar=dict(radialaxis=dict(visible=True, range=[0, 10])), margin=dict(t=30, b=30))
+        fig.add_trace(go.Scatterpolar(r=[norm_val(loc_a['magnet_count'], max_mag), 10 - norm_val(loc_a['competitor_count'], max_comp), norm_val(loc_a['population_proxy'], max_pop), loc_a['score']], theta=['Trafik (Maqnitlər)', 'Rəqabətin Azlığı', 'Əhali Sıxlığı', 'Ümumi Potensial'], fill='toself', name='🥇 Məkan A', line_color='#10b981'))
+        fig.add_trace(go.Scatterpolar(r=[norm_val(loc_b['magnet_count'], max_mag), 10 - norm_val(loc_b['competitor_count'], max_comp), norm_val(loc_b['population_proxy'], max_pop), loc_b['score']], theta=['Trafik (Maqnitlər)', 'Rəqabətin Azlığı', 'Əhali Sıxlığı', 'Ümumi Potensial'], fill='toself', name='🥈 Məkan B', line_color='#f59e0b'))
+        fig.update_layout(polar=dict(radialaxis=dict(visible=True, range=[0, 10])), margin=dict(t=30, b=30), paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
         st.plotly_chart(fig, use_container_width=True)
 
 with tab3:
     if not scored_grid.empty:
-        st.markdown("### 📑 Tam Data Cədvəli")
+        st.markdown("### 📑 Heksagonların Tam Məlumat Bazası (Database)")
         display_df = scored_grid.drop(columns=["geometry"]).sort_values(by="score", ascending=False)
         st.dataframe(display_df, use_container_width=True)
+        
+        csv = display_df.to_csv(index=False).encode('utf-8')
+        st.download_button("📥 Məlumatları Yüklə (CSV Formatı)", csv, "geotarget_hesabat.csv", "text/csv")
