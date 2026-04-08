@@ -20,100 +20,108 @@ st.markdown("""
         font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
     
-    /* Gərəksiz Streamlit elementlərini gizlədirik */
     #MainMenu {visibility: hidden;}
-    header {visibility: hidden;}
+    /* header {visibility: hidden;}  <- BURA SİLİNDİ: Çünki sol paneli açan düyməni (hamburger) gizlədirdi! */
     footer {visibility: hidden;}
     
-    /* Düymələrin SaaS dizaynı */
     div.stButton > button {
         background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
         color: white;
         border-radius: 8px;
         border: none;
-        padding: 0.5rem 1rem;
+        padding: 0.6rem 1rem;
         font-weight: 600;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         transition: all 0.2s ease-in-out;
     }
     div.stButton > button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         color: white;
-        border: none;
     }
     
-    /* Metrik (Xal/KPI) Kartlarının Dizaynı */
     div[data-testid="metric-container"] {
         background-color: #ffffff;
         border: 1px solid #e2e8f0;
         padding: 20px;
         border-radius: 12px;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-        transition: transform 0.2s ease;
-    }
-    div[data-testid="metric-container"]:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
     }
     
-    /* Tabların (Nişanların) Dizaynı */
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 24px;
-    }
-    .stTabs [data-baseweb="tab"] {
-        height: 50px;
-        white-space: pre-wrap;
-        background-color: transparent;
-        border-radius: 4px 4px 0px 0px;
-        gap: 1px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        font-weight: 600;
+    .hero-box {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        padding: 60px 30px;
+        border-radius: 20px;
+        text-align: center;
+        border: 1px solid #cbd5e1;
+        margin-bottom: 40px;
+        margin-top: 20px;
     }
     
-    /* Dark Mode Uyğunlaşdırması */
+    .feature-box {
+        padding: 25px;
+        background: white;
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+        height: 100%;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        text-align: center;
+    }
+    
     @media (prefers-color-scheme: dark) {
-        div[data-testid="metric-container"] {
-            background-color: #1e293b;
-            border: 1px solid #334155;
-        }
-        .login-box {
-            background: #1e293b !important;
-            border: 1px solid #334155 !important;
-        }
-        .login-title { color: #f8fafc !important; }
-        .login-subtitle { color: #94a3b8 !important; }
+        div[data-testid="metric-container"], .feature-box { background-color: #1e293b; border-color: #334155; }
+        .hero-box { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-color: #334155; }
     }
 </style>
 """, unsafe_allow_html=True)
 
-# --- 🔐 LOGIN PAGE (SİSTEMƏ GİRİŞ) ---
-if "logged_in" not in st.session_state:
-    st.session_state.logged_in = False
+# --- 🚀 LANDING PAGE (TƏQDİMAT ÜÇÜN GET STARTED) ---
+if "started" not in st.session_state:
+    st.session_state.started = False
 
-if not st.session_state.logged_in:
-    col1, col2, col3 = st.columns([1, 1.2, 1])
-    with col2:
-        st.markdown("<br><br><br>", unsafe_allow_html=True)
+if not st.session_state.started:
+    st.markdown("""
+    <div class="hero-box">
+        <h1 style='font-size: 3.5rem; color: #2563eb; font-weight: 800; margin-bottom: 15px;'>🌍 GeoTarget AI</h1>
+        <p style='font-size: 1.5rem; color: #64748b; font-weight: 400; max-width: 800px; margin: 0 auto; line-height: 1.5;'>
+            Data-Driven Location Intelligence.<br>
+            <span style="font-size: 1.1rem;">Yeni biznesiniz üçün ən optimal məkanı təxminlərə görə deyil, real xəritə datalarına və süni intellektə əsasən seçin.</span>
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    c1, c2, c3 = st.columns(3)
+    with c1:
         st.markdown("""
-        <div class="login-box" style="background-color: white; padding: 40px; border-radius: 16px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); border: 1px solid #f1f5f9; text-align: center;">
-            <div style="font-size: 50px; margin-bottom: 10px;">🌍</div>
-            <h2 class="login-title" style="color: #0f172a; font-weight: 700; margin-bottom: 5px; font-family: 'Plus Jakarta Sans', sans-serif;">GeoTarget AI</h2>
-            <p class="login-subtitle" style="color: #64748b; font-size: 15px; margin-bottom: 30px;">Professional Geo-Analitika Platformasına Giriş</p>
+        <div class="feature-box">
+            <div style="font-size: 40px; margin-bottom: 10px;">📡</div>
+            <h3 style="color:#10b981; margin-top:0;">Real-Time Data</h3>
+            <p style="color:#64748b;">OpenStreetMap vasitəsilə saniyələr içində rəqib obyektləri, trafik maqnitlərini və binaları canlı analiz edirik.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    with c2:
+        st.markdown("""
+        <div class="feature-box">
+            <div style="font-size: 40px; margin-bottom: 10px;">🛑</div>
+            <h3 style="color:#f59e0b; margin-top:0;">Uber H3 Grid</h3>
+            <p style="color:#64748b;">Xəritəni qabaqcıl H3 altıbucaqlılarına bölərək hər bir nöqtənin riyazi potensialını və xalını hesablayırıq.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    with c3:
+        st.markdown("""
+        <div class="feature-box">
+            <div style="font-size: 40px; margin-bottom: 10px;">🤖</div>
+            <h3 style="color:#3b82f6; margin-top:0;">AI Analitika</h3>
+            <p style="color:#64748b;">Sadəcə rəqəmlər deyil. Sistem sizə ən uyğun məkanlar üçün süni intellekt əsaslı konkret biznes rəyləri verir.</p>
+        </div>
         """, unsafe_allow_html=True)
         
-        user = st.text_input("İstifadəçi Adı (admin)", placeholder="İstifadəçi adını daxil edin...")
-        pwd = st.text_input("Şifrə (admin)", type="password", placeholder="••••••••")
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        if st.button("Platformaya Daxil Ol 🚀", use_container_width=True):
-            if user == "admin" and pwd == "admin":
-                st.session_state.logged_in = True
-                st.rerun()
-            else:
-                st.error("⚠️ İstifadəçi adı və ya şifrə yanlışdır!")
-        st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    col1, col2, col3 = st.columns([1, 1.5, 1])
+    with col2:
+        if st.button("🚀 Platformaya Keçid (Get Started)", use_container_width=True):
+            st.session_state.started = True
+            st.rerun()
     st.stop()
 
 # --- 🚀 ƏSAS TƏTBİQ (DASHBOARD) ---
@@ -163,8 +171,8 @@ with st.sidebar:
         st.session_state.run_analysis = True
         
     st.markdown("<br>", unsafe_allow_html=True)
-    if st.button("🚪 Çıxış (Logout)", use_container_width=True):
-        st.session_state.logged_in = False
+    if st.button("🏠 Ana Səhifəyə Qayıt", use_container_width=True):
+        st.session_state.started = False
         st.rerun()
 
 icon_map = {
