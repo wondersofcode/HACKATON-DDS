@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#e2e2e8",
+                        "outline-variant": "#3b494c",
+                        "surface-tint": "#00daf3",
+                        "tertiary": "#f1e9ff",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#333539",
+                        "on-primary-fixed": "#001f24",
+                        "on-secondary": "#003829",
+                        "on-tertiary-fixed": "#20005f",
+                        "inverse-on-surface": "#2f3035",
+                        "secondary-fixed": "#45fec9",
+                        "tertiary-fixed": "#e8deff",
+                        "surface": "#111318",
+                        "surface-container": "#1e2024",
+                        "secondary": "#45fec9",
+                        "on-secondary-container": "#005e47",
+                        "surface-container-low": "#1a1c20",
+                        "surface-variant": "#333539",
+                        "on-secondary-fixed": "#002117",
+                        "secondary-fixed-dim": "#00e1ae",
+                        "on-background": "#e2e2e8",
+                        "inverse-primary": "#006875",
+                        "on-tertiary": "#370096",
+                        "surface-container-lowest": "#0c0e12",
+                        "primary": "#c3f5ff",
+                        "on-secondary-fixed-variant": "#00513d",
+                        "on-surface-variant": "#bac9cc",
+                        "on-tertiary-container": "#622be5",
+                        "primary-container": "#00e5ff",
+                        "primary-fixed-dim": "#00daf3",
+                        "on-primary-fixed-variant": "#004f58",
+                        "surface-dim": "#111318",
+                        "on-primary": "#00363d",
+                        "tertiary-fixed-dim": "#cdbdff",
+                        "on-tertiary-fixed-variant": "#4f00d0",
+                        "secondary-container": "#00e1ae",
+                        "inverse-surface": "#e2e2e8",
+                        "surface-bright": "#37393e",
+                        "background": "#111318",
+                        "error": "#ffb4ab",
+                        "on-primary-container": "#00626e",
+                        "outline": "#849396",
+                        "surface-container-high": "#282a2e",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#d6c9ff",
+                        "primary-fixed": "#9cf0ff",
+                        "on-error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(17, 19, 24, 0.6);
+            backdrop-filter: blur(24px);
+        }
+        .glow-hover:hover {
+            box-shadow: 0 0 20px rgba(195, 245, 255, 0.1);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<header class="bg-[#111318]/80 backdrop-blur-xl border-b border-[#c3f5ff]/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)] fixed top-0 z-50 flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-[#c3f5ff] drop-shadow-[0_0_8px_rgba(195,245,255,0.4)] font-headline">GeoTarget AI</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-[#c3f5ff] font-semibold font-headline text-sm tracking-tight transition-all" href="#">Interactive Map</a>
+<a class="text-[#e2e2e8]/60 hover:text-[#c3f5ff] hover:bg-[#c3f5ff]/5 px-3 py-1 rounded transition-all font-headline text-sm tracking-tight" href="#">Scenario Comparison</a>
+<a class="text-[#e2e2e8]/60 hover:text-[#c3f5ff] hover:bg-[#c3f5ff]/5 px-3 py-1 rounded transition-all font-headline text-sm tracking-tight" href="#">Data Analytics</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary font-headline font-bold text-sm px-5 py-2 rounded-full hover:scale-95 duration-200 transition-transform">
+                Go to Dashboard
+            </button>
+</div>
+</header>
+<!-- SideNavBar (Intelligence Hub) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-72 bg-[#111318]/60 backdrop-blur-2xl flex flex-col p-6 space-y-8 overflow-y-auto no-scrollbar border-r border-[#c3f5ff]/5">
+<div class="space-y-1">
+<h2 class="text-[#45fec9] font-inter text-xs font-medium uppercase tracking-widest">Intelligence Hub</h2>
+<p class="text-on-surface-variant text-[10px] uppercase tracking-tighter opacity-60">Strategic Command</p>
+</div>
+<!-- Input Section -->
+<div class="space-y-6">
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider">Geospatial Coordinates</label>
+<div class="grid grid-cols-2 gap-2">
+<input class="bg-surface-container-highest border-none rounded-lg text-xs py-2.5 focus:ring-1 focus:ring-primary text-on-surface placeholder:text-on-surface-variant/30" placeholder="Lat: 40.7128" type="text"/>
+<input class="bg-surface-container-highest border-none rounded-lg text-xs py-2.5 focus:ring-1 focus:ring-primary text-on-surface placeholder:text-on-surface-variant/30" placeholder="Long: -74.0060" type="text"/>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<label class="text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider">Scan Radius (KM)</label>
+<span class="text-primary text-xs font-mono">12.5</span>
+</div>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider">Target Business Type</label>
+<select class="w-full bg-surface-container-highest border-none rounded-lg text-xs py-2.5 focus:ring-1 focus:ring-primary text-on-surface">
+<option>Luxury Retail</option>
+<option>Boutique Fitness</option>
+<option>Specialty Coffee</option>
+<option>Co-working Spaces</option>
+</select>
+</div>
+</div>
+<div class="pt-4 border-t border-outline-variant/20 space-y-4">
+<h3 class="text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider">Advanced Settings</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-xs text-on-surface/80">Competitor Weight</span>
+<input checked="" class="rounded text-secondary bg-surface-container-highest border-none focus:ring-0" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-xs text-on-surface/80">Traffic Magnets</span>
+<input checked="" class="rounded text-secondary bg-surface-container-highest border-none focus:ring-0" type="checkbox"/>
+</div>
+</div>
+</div>
+</div>
+<button class="mt-auto bg-gradient-to-br from-secondary to-on-secondary-container text-on-secondary font-headline font-bold text-xs py-4 rounded-xl shadow-[0_10px_20px_rgba(69,254,201,0.15)] hover:scale-[0.98] transition-transform uppercase tracking-widest">
+            Run Global Scan
+        </button>
+<div class="pt-6 flex items-center justify-between border-t border-outline-variant/10">
+<div class="flex gap-4">
+<button class="text-[#e2e2e8]/40 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">help</span>
+</button>
+<button class="text-[#e2e2e8]/40 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">person</span>
+</button>
+</div>
+<span class="text-[10px] font-mono text-on-surface-variant/40">v2.4.0-Stable</span>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-72 mt-16 p-8 min-h-screen bg-surface-container-lowest">
+<!-- KPI Header -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="bg-surface-container-high rounded-2xl p-6 glow-hover transition-all group">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Viability Score</span>
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">analytics</span>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-4xl font-headline font-bold text-primary">84.2</span>
+<span class="text-secondary text-xs font-medium mb-1">+12% vs avg</span>
+</div>
+<div class="mt-4 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[84%] shadow-[0_0_10px_rgba(195,245,255,0.5)]"></div>
+</div>
+</div>
+<div class="bg-surface-container-high rounded-2xl p-6 glow-hover transition-all group">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Direct Competitors</span>
+<span class="material-symbols-outlined text-secondary group-hover:scale-110 transition-transform">compare_arrows</span>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-4xl font-headline font-bold text-on-surface">18</span>
+<span class="text-on-surface-variant text-xs mb-1">Within 5km</span>
+</div>
+<div class="mt-4 flex gap-1 h-4">
+<div class="flex-1 bg-secondary/20 rounded-sm"></div>
+<div class="flex-1 bg-secondary/40 rounded-sm"></div>
+<div class="flex-1 bg-secondary/60 rounded-sm"></div>
+<div class="flex-1 bg-secondary/30 rounded-sm"></div>
+<div class="flex-1 bg-secondary/10 rounded-sm"></div>
+</div>
+</div>
+<div class="bg-surface-container-high rounded-2xl p-6 glow-hover transition-all group">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Traffic Magnets</span>
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">hub</span>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-4xl font-headline font-bold text-on-surface">142</span>
+<span class="text-primary text-xs font-medium mb-1">High density</span>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-[10px] text-on-surface-variant">Top: Grand Central Terminal</span>
+</div>
+</div>
+</div>
+<!-- Central Content Tabs Container -->
+<div class="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant/10 shadow-2xl min-h-[600px] flex flex-col">
+<!-- Map Area (Active Tab View) -->
+<div class="relative flex-1 bg-[#0c0e12]">
+<!-- Placeholder for Folium/Leaflet Map -->
+<div class="absolute inset-0 grayscale contrast-125 opacity-40">
+<img alt="Dark themed geospatial map showing urban density and heat signatures" class="w-full h-full object-cover" data-alt="Dark themed geospatial map of a metropolitan area with glowing blue and teal data points indicating density and points of interest" data-location="New York City" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWOT8P93RvzCxPYuetIhNtxo3pyUDt1gZVMy5adAbY2yA5271CDwK9srmGHxHczeBQWTgmxISfzBlU-0fXypquJjDCgq1BHM4_GEXYGqHClrJIxhX6g5DreoqWvzMUimHVKAGpZ4B_AsH4-PNpnufUtglg7DGgZB1QI_8FU2vE4HpFODjMruUwFvI-QeDTCsiLIbhI8qpMJT8Zlek_5zmHBsUxkjVgVo1ioj7h29egMWq1cE9L38T6XD833tNt9umK4ZxPHeygw2M"/>
+</div>
+<!-- Map Overlays -->
+<div class="absolute inset-0 pointer-events-none p-6">
+<!-- AI Insight Bubble -->
+<div class="pointer-events-auto absolute bottom-8 left-8 w-80 glass-panel border border-primary/20 rounded-2xl p-5 shadow-2xl">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h4 class="text-xs font-headline font-bold text-primary uppercase tracking-wider">AI Intelligence Insight</h4>
+</div>
+<p class="text-xs text-on-surface leading-relaxed opacity-90">
+                            Based on your parameters, the intersection at <span class="text-secondary font-bold">5th Ave &amp; 23rd St</span> shows an 89% market gap for <span class="italic">Boutique Fitness</span>. Foot traffic peaks 7:30AM - 9:00AM.
+                        </p>
+<button class="mt-4 w-full py-2 bg-primary/10 hover:bg-primary/20 text-primary text-[10px] font-bold rounded-lg transition-colors uppercase tracking-widest">
+                            Deep Dive Node
+                        </button>
+</div>
+<!-- Map Legend / Controls -->
+<div class="pointer-events-auto absolute top-6 right-6 flex flex-col gap-2">
+<div class="glass-panel p-2 rounded-xl border border-outline-variant/20 flex flex-col gap-2">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface hover:text-primary transition-colors bg-surface-container-highest rounded-lg">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-on-surface hover:text-primary transition-colors bg-surface-container-highest rounded-lg">
+<span class="material-symbols-outlined">remove</span>
+</button>
+</div>
+<div class="glass-panel p-2 rounded-xl border border-outline-variant/20">
+<button class="w-10 h-10 flex items-center justify-center text-secondary bg-surface-container-highest rounded-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">layers</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Scan Progress Overlay (Simulated) -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-20">
+<div class="w-64 h-64 border-2 border-primary rounded-full animate-ping"></div>
+</div>
+</div>
+<!-- Tab Footer / Selector -->
+<div class="h-16 bg-surface-container border-t border-outline-variant/10 flex items-center px-6 justify-between">
+<div class="flex gap-1">
+<button class="px-4 py-2 bg-primary/10 text-primary text-xs font-bold rounded-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">map</span>
+                        Interactive Map
+                    </button>
+<button class="px-4 py-2 hover:bg-white/5 text-on-surface-variant text-xs font-medium rounded-lg flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-sm">radar</span>
+                        Scenario Comparison
+                    </button>
+<button class="px-4 py-2 hover:bg-white/5 text-on-surface-variant text-xs font-medium rounded-lg flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-sm">table_chart</span>
+                        Data Analytics
+                    </button>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 text-xs text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-sm">download</span>
+                        Download CSV
+                    </button>
+<div class="h-4 w-px bg-outline-variant/30"></div>
+<span class="text-[10px] font-mono text-on-surface-variant">Last Scan: 2 mins ago</span>
+</div>
+</div>
+</div>
+<!-- Lower Section: Recent Insights Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8">
+<div class="md:col-span-2 bg-surface-container-high rounded-2xl p-6 border border-outline-variant/10">
+<h3 class="text-xs font-headline font-bold text-on-surface uppercase tracking-widest mb-6">Market Trends</h3>
+<div class="flex items-center justify-between group cursor-pointer hover:bg-white/5 p-3 rounded-xl transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<div>
+<p class="text-sm font-semibold">Residential Inflow</p>
+<p class="text-xs text-on-surface-variant">Zone A-14 increased by 8.4%</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+<div class="flex items-center justify-between group cursor-pointer hover:bg-white/5 p-3 rounded-xl transition-colors mt-2">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">storefront</span>
+</div>
+<div>
+<p class="text-sm font-semibold">Lease Renewals</p>
+<p class="text-xs text-on-surface-variant">Average commercial rates rising</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+<div class="bg-surface-container-high rounded-2xl p-6 border border-outline-variant/10 flex flex-col justify-between">
+<div>
+<h3 class="text-xs font-headline font-bold text-on-surface uppercase tracking-widest mb-2">Competitor Saturation</h3>
+<p class="text-3xl font-headline font-bold text-secondary">42%</p>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[42%]"></div>
+</div>
+<p class="text-[10px] text-on-surface-variant">Lower than target threshold of 55%</p>
+</div>
+<div class="bg-surface-container-high rounded-2xl p-6 border border-outline-variant/10 relative overflow-hidden group">
+<img alt="Abstract blue data visualization texture" class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:scale-110 transition-transform duration-700" data-alt="Deep blue abstract geometric patterns with subtle light refractions, creating a high-tech data aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1GTcIZ3uCc9_yNgp5M-GWLhCcVLaZq_j44qhx_Vb3YaluSaNhRSFtxOCxB5uRI5PHBh4DSh_BFNH4F4YhYsSU0gkxh4GHN-gOtmvM27gznaEnp1FrfecEjDCys8hPddJXQUWeIRFGxbvTCVm4b06YPqkQO7mMO496eOVYvb8Mt-PV8TTd_KtX_sT6EJrVt6vKUZr6hVO9cnuzY-L3JbAoEstkT8mT8U7kB-ElK4O5vZFrvEfPYQ8dvr4YGoT9ZJo1z9KYogBX1v0"/>
+<h3 class="relative z-10 text-xs font-headline font-bold text-on-surface uppercase tracking-widest mb-4">Export Analysis</h3>
+<div class="relative z-10 space-y-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">description</span>
+<span class="text-xs">PDF Summary</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">grid_view</span>
+<span class="text-xs">Raw JSON Feed</span>
+</div>
+</div>
+<button class="relative z-10 mt-6 w-full py-2 border border-primary/30 hover:border-primary text-primary text-[10px] font-bold rounded-lg transition-colors uppercase tracking-widest">
+                    Request Full Report
+                </button>
+</div>
+</div>
+</main>
+</body></html>

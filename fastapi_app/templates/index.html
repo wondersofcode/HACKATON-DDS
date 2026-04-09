@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GeoTarget AI - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#4f00d0",
+                        "tertiary-container": "#d6c9ff",
+                        "tertiary-fixed": "#e8deff",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-lowest": "#0c0e12",
+                        "background": "#111318",
+                        "inverse-on-surface": "#2f3035",
+                        "tertiary": "#f1e9ff",
+                        "on-surface": "#e2e2e8",
+                        "secondary": "#45fec9",
+                        "primary-fixed-dim": "#00daf3",
+                        "surface-container-low": "#1a1c20",
+                        "surface-container-high": "#282a2e",
+                        "on-secondary-fixed": "#002117",
+                        "on-primary-container": "#00626e",
+                        "primary": "#c3f5ff",
+                        "on-secondary-fixed-variant": "#00513d",
+                        "surface": "#111318",
+                        "error": "#ffb4ab",
+                        "surface-bright": "#37393e",
+                        "secondary-fixed-dim": "#00e1ae",
+                        "inverse-surface": "#e2e2e8",
+                        "secondary-fixed": "#45fec9",
+                        "secondary-container": "#00e1ae",
+                        "tertiary-fixed-dim": "#cdbdff",
+                        "on-tertiary-container": "#622be5",
+                        "on-primary-fixed": "#001f24",
+                        "on-primary": "#00363d",
+                        "outline": "#849396",
+                        "on-surface-variant": "#bac9cc",
+                        "surface-container": "#1e2024",
+                        "on-tertiary": "#370096",
+                        "surface-dim": "#111318",
+                        "primary-container": "#00e5ff",
+                        "surface-tint": "#00daf3",
+                        "on-tertiary-fixed": "#20005f",
+                        "primary-fixed": "#9cf0ff",
+                        "surface-variant": "#333539",
+                        "on-secondary-container": "#005e47",
+                        "on-secondary": "#003829",
+                        "inverse-primary": "#006875",
+                        "surface-container-highest": "#333539",
+                        "on-error": "#690005",
+                        "on-background": "#e2e2e8",
+                        "on-primary-fixed-variant": "#004f58",
+                        "outline-variant": "#3b494c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .glass-panel {
+            background: rgba(26, 28, 32, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(195, 245, 255, 0.15);
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30 min-h-screen flex items-center justify-center overflow-hidden">
+<!-- Background Visualization Layer -->
+<div class="fixed inset-0 z-0 overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-tr from-surface via-surface/90 to-surface-container-low"></div>
+<!-- Decorative Map Background -->
+<div class="absolute top-0 right-0 w-full h-full opacity-30 pointer-events-none">
+<img class="w-full h-full object-cover filter brightness-[0.4] contrast-[1.2]" data-alt="Abstract dark blue digital world map with illuminated data nodes and glowing connections, tech aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCu1hFpPgIusOAfksbjG5DI_8hEvO8uS5GpZMebPTcI_1rVPwa43sTUo_9IN46-Q0Td_RFKsC-gRaeN916Qj1-62-DdWt4cF6Ax8NnS3yuXdtFQCXd3RxvRnoGB3SO-U9zHcWf67lpsdvK6qHvpRvbTGiYZ1x5khdoctLtb320wvZ47q2HH9RfCJsZbu55i12BcluahpuGWxki0nCBEBMm0x3lD2T7pN6uwVvF9qZqaXARCU7AbjLfzhFczsG5qXyJaasPhquccpqc"/>
+</div>
+<!-- Ambient Glows -->
+<div class="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-primary/10 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[0%] right-[10%] w-[40%] h-[40%] bg-secondary/5 rounded-full blur-[100px]"></div>
+</div>
+<!-- Main Content Container -->
+<main class="relative z-10 w-full max-w-[1280px] px-6 lg:flex lg:items-center lg:justify-between lg:gap-12">
+<!-- Left Side: Value Prop (Hidden on mobile/tablet) -->
+<div class="hidden lg:flex flex-col max-w-xl animate-fade-in">
+<div class="mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="explore">explore</span>
+<h1 class="font-headline text-3xl font-bold tracking-tighter text-primary">GeoTarget AI</h1>
+</div>
+<h2 class="font-headline text-5xl font-extrabold text-on-surface leading-tight mb-6">
+                Predictive <span class="text-secondary">Intelligence</span> <br/>at Local Scale.
+            </h2>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-8 max-w-md">
+                Harness the power of high-altitude geospatial data and generative AI to dominate your target markets with precision.
+            </p>
+<div class="flex gap-4">
+<div class="flex flex-col p-4 rounded-xl bg-surface-container-low/40 backdrop-blur-sm border border-outline-variant/10">
+<span class="text-2xl font-bold text-primary">99.8%</span>
+<span class="text-label-sm uppercase tracking-widest text-on-surface-variant text-[10px]">Data Accuracy</span>
+</div>
+<div class="flex flex-col p-4 rounded-xl bg-surface-container-low/40 backdrop-blur-sm border border-outline-variant/10">
+<span class="text-2xl font-bold text-secondary">2.4M</span>
+<span class="text-label-sm uppercase tracking-widest text-on-surface-variant text-[10px]">Active Nodes</span>
+</div>
+</div>
+</div>
+<!-- Right Side: Login Card -->
+<div class="w-full max-w-md mx-auto lg:mx-0">
+<div class="glass-panel p-8 md:p-10 rounded-2xl border border-white/5 shadow-2xl relative overflow-hidden group">
+<!-- Branding for Mobile -->
+<div class="lg:hidden flex flex-col items-center mb-8">
+<div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="explore">explore</span>
+</div>
+<h1 class="font-headline text-2xl font-bold text-on-surface">GeoTarget AI</h1>
+</div>
+<div class="mb-8 space-y-2">
+<h3 class="font-headline text-3xl font-semibold text-on-surface tracking-tight">Welcome Back</h3>
+<p class="text-on-surface-variant text-sm">Please enter your credentials to access the intelligence platform.</p>
+</div>
+<form class="space-y-6">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="block text-sm font-medium text-on-surface-variant ml-1" for="email">Work Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-lg" data-icon="alternate_email">alternate_email</span>
+<input class="w-full bg-surface-container/50 border border-outline-variant/30 rounded-lg py-3.5 pl-12 pr-4 text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all duration-200" id="email" placeholder="name@company.com" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="flex justify-between items-center px-1">
+<label class="block text-sm font-medium text-on-surface-variant" for="password">Password</label>
+<a class="text-xs text-primary hover:text-secondary-fixed-dim transition-colors" href="#">Forgot password?</a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-lg" data-icon="lock">lock</span>
+<input class="w-full bg-surface-container/50 border border-outline-variant/30 rounded-lg py-3.5 pl-12 pr-12 text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all duration-200" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember Me -->
+<div class="flex items-center space-x-2 px-1">
+<input class="w-4 h-4 rounded border-outline-variant bg-surface-container-high text-primary focus:ring-primary focus:ring-offset-background cursor-pointer" id="remember" type="checkbox"/>
+<label class="text-sm text-on-surface-variant cursor-pointer select-none" for="remember">Remember this device for 30 days</label>
+</div>
+<!-- Sign In Button -->
+<button class="btn-glow w-full bg-primary-container hover:bg-primary-fixed-dim text-on-primary font-headline font-bold py-4 rounded-lg transition-all duration-300 transform active:scale-[0.98] flex items-center justify-center gap-2" type="submit">
+<span>Sign In</span>
+<span class="material-symbols-outlined text-xl" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- Divider -->
+<div class="relative py-4">
+<div class="absolute inset-0 flex items-center"><div class="w-full border-t border-outline-variant/30"></div></div>
+<div class="relative flex justify-center text-xs uppercase tracking-widest"><span class="bg-surface-container-high/0 px-4 text-outline font-semibold">Or continue with</span></div>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-3 py-3 px-4 rounded-lg bg-surface-container-low border border-outline-variant/20 hover:bg-surface-container-high hover:border-outline-variant transition-all duration-200 group" type="button">
+<img alt="Google" class="w-5 h-5 grayscale group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA86i3hMHkNjCVEp6k2e01IaId6hdtbSbM-bLtX1xCIuiVdMMzIzJnNrIQiTsRjQDF76SvtdbKv9f23c3rNS_kpFjUJSBOyxWg97-gnUU3TbJshq-nFLTNoQijk6mF-cML6SbRbEgYQ0FXf7cK3BDMK6bW1NyN_rLgoTGNY6rhvGsWy5SC14cVViz3l51tTOMftX3xpG17i1vIciUy1J6mq6RcE3kynil83o0sf4LIxoHT2q3TPe7zHpI8d7VINRgqEMFmjh2B9OBQ"/>
+<span class="text-sm font-medium">Google</span>
+</button>
+<button class="flex items-center justify-center gap-3 py-3 px-4 rounded-lg bg-surface-container-low border border-outline-variant/20 hover:bg-surface-container-high hover:border-outline-variant transition-all duration-200 group" type="button">
+<svg class="w-5 h-5 fill-on-surface-variant group-hover:fill-on-surface" viewbox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+<span class="text-sm font-medium">GitHub</span>
+</button>
+</div>
+</form>
+<div class="mt-10 text-center">
+<p class="text-sm text-on-surface-variant">
+                        New to GeoTarget AI? 
+                        <a class="text-primary font-semibold hover:underline underline-offset-4 ml-1" href="#">Create an account</a>
+</p>
+</div>
+<!-- Footer style links for the card -->
+<div class="mt-8 pt-6 border-t border-outline-variant/10 flex justify-center gap-6 text-[10px] text-outline uppercase tracking-widest font-bold">
+<a class="hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms</a>
+<a class="hover:text-primary transition-colors" href="#">Security</a>
+</div>
+</div>
+</div>
+</main>
+<!-- Global Footer -->
+<footer class="fixed bottom-0 w-full py-6 flex flex-col md:flex-row justify-between items-center px-12 z-20 pointer-events-none opacity-40">
+<p class="font-inter text-xs uppercase tracking-widest text-e2e2e8/40">© 2024 GeoTarget AI. Precise Intelligence.</p>
+<div class="flex gap-6 pointer-events-auto">
+<span class="font-inter text-xs uppercase tracking-widest text-[#e2e2e8]/40">Status: Operational</span>
+</div>
+</footer>
+</body></html>
